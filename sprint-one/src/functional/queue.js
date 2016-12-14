@@ -22,6 +22,7 @@ var Queue = function() {
         index = index.toString();
         storage[key] = storage[index];
       }
+      size--;
     }
     return result;
   };
