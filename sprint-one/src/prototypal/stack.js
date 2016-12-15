@@ -3,8 +3,8 @@ var Stack = function() {
   // but try not not reference your old code in writing the new style.
   var someInstance = Object.create(stackMethods);
 
-  someInstace.storage = {};
-  someInstace.sizeOfStorage = 0;
+  someInstance.storage = {};
+  someInstance.sizeOfStorage = 0;
 
   return someInstance;
 };
@@ -18,9 +18,15 @@ stackMethods.push = function(value) {
 
 stackMethods.pop = function() {
   // if size is larger than 0 
+  if (this.sizeOfStorage > 0) {
     // store the value of key to be deleted
+    this.sizeOfStorage--;
+    var result = this.storage[this.sizeOfStorage];
     // delete key
+    delete this.storage[this.sizeOfStorage];
     // return deleted value
+    return result;
+  }
 };
 
 stackMethods.size = function() {
