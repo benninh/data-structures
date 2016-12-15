@@ -23,11 +23,13 @@ var queueMethods = {};
 
 
 queueMethods.enqueue = function() {
-
+  this.sizeOfStorage++;
 };
 
 queueMethods.dequeue = function() {
-
+  if (this.sizeOfStorage > 0) {
+    this.sizeOfStorage--;
+  }
 };
 
 queueMethods.size = function() {
