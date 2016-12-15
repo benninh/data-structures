@@ -5,20 +5,27 @@ var Stack = function() {
   
   this.storage = {};
   this.sizeOfStorage = 0;
+  this.result = 0;
 
   return this.someInstance;
 };
 
 Stack.prototype.push = function(value) {
-
+  this.storage[this.sizeOfStorage] = value;
+  this.sizeOfStorage++;
 };
 
 Stack.prototype.pop = function() {
-
+  if (this.sizeOfStorage > 0) {
+    this.sizeOfStorage--;
+    this.result = this.storage[this.sizeOfStorage];
+    delete this.storage[this.sizeOfStorage];
+  }
+  return this.result;
 };
 
 Stack.prototype.size = function() {
-//console.log(this.size);
+  return this.sizeOfStorage;
 };
 
 /*
