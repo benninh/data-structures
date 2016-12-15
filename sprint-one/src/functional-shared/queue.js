@@ -5,6 +5,8 @@ var Queue = function() {
 
   someInstance.storage = {};
   someInstance.sizeOfStorage = 0;
+  someInstance.result = 0;
+  someInstance.tempSize = 0;
 
   extend(someInstance, queueMethods);
 
@@ -22,16 +24,23 @@ var extend = function(to, toAdd) {
 var queueMethods = {};
 
 
-queueMethods.enqueue = function() {
+queueMethods.enqueue = function(value) {
+  this.storage[this.sizeOfStorage] = value;
+  delete this.storage[this.sizeOfStorage];
   this.sizeOfStorage++;
 };
 
 queueMethods.dequeue = function() {
-  if (this.sizeOfStorage > 0) {
-    this.sizeOfStorage--;
+  
+  if (this.sizeOfStorage - this.tempSize > 0) {
+    // need 1 more line of code to make this work
+    this.result = this.storage[this.tempSize];
+    this.tempSize++;
   }
+
+  return this.result;
 };
 
 queueMethods.size = function() {
-  return this.sizeOfStorage;
+  return this.sizeOfStorage - this.tempSize;
 };
