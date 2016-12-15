@@ -26,7 +26,7 @@ var queueMethods = {};
 
 queueMethods.enqueue = function(value) {
   this.storage[this.sizeOfStorage] = value;
-  delete this.storage[this.sizeOfStorage];
+  
   this.sizeOfStorage++;
 };
 
@@ -35,6 +35,7 @@ queueMethods.dequeue = function() {
   if (this.sizeOfStorage - this.tempSize > 0) {
     // need 1 more line of code to make this work
     this.result = this.storage[this.tempSize];
+    delete this.storage[this.tempSize];
     this.tempSize++;
   }
 
