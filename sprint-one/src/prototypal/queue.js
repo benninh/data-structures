@@ -19,9 +19,9 @@ queueMethods.enqueue = function(value) {
 
 queueMethods.dequeue = function() {
   if (this.sizeOfStorage - this.tempIndex > 0) {
-    this.tempIndex++;
     var result = this.storage[this.tempIndex];
     delete this.storage[this.tempIndex];
+    this.tempIndex++;
     return result;
   }
 };
