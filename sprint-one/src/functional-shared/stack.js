@@ -5,7 +5,7 @@ var Stack = function() {
 
   someInstance.storage = {};
   someInstance.sizeOfStorage = 0;
-
+  someInstance.result = 0;
   extend(someInstance, stackMethods);
   
   return someInstance;
@@ -20,11 +20,21 @@ var extend = function(to, toAdd) {
 var stackMethods = {};
 
 // push
-stackMethods.push = function() {
+stackMethods.push = function(value) {
+  this.storage[this.sizeOfStorage] = value;
+  this.sizeOfStorage++;
 
 };
 // pop
 stackMethods.pop = function() {
+  if (this.sizeOfStorage > 0) {
+    this.sizeOfStorage--;
+    this.result = this.storage[this.sizeOfStorage];
+    delete this.storage[this.sizeOfStorage];  
+  }
+
+
+  return this.result;
 
 };
 // size
