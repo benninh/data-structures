@@ -3,7 +3,10 @@ var Tree = function(value) {
   newTree.value = value;
 
   // your code here
-  newTree.children = null;  // fix me
+  newTree.children = [];  // fix me
+
+  // fill the node with treeMethods
+  _.extend(newTree, treeMethods);
 
   return newTree;
 };
@@ -11,13 +14,43 @@ var Tree = function(value) {
 var treeMethods = {};
 
 treeMethods.addChild = function(value) {
+  // push new 'branches' of tree to children
+  this.children.push(Tree(value));
 };
 
 treeMethods.contains = function(target) {
+
+  // define a subroutine that takes current child and target
+  var treeContains = function(currentChild, target) {
+    // if currentChild.value is target
+    if (currentChild.value === target) {
+      // return true
+      return true;
+    } else {
+      // else, check if currentChild.children exists
+      if (currentChild.children.length > 0) {
+        // if so, for each child
+        return _.reduce(currentChild.children, function(accum, child) {
+          // return the recursing of the three
+          if (accum === true) {
+            return accum;
+          } else {
+            return treeContains(child, target); 
+          }
+        }, false);
+      } else { // else return false
+        return false;
+      }
+    }
+      
+  };
+  return treeContains(this, target);
 };
 
 
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ add is O(1);
+ contains is O(n);
  */
