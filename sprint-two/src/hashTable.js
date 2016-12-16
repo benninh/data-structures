@@ -7,17 +7,34 @@ var HashTable = function() {
 
 HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  // if bucket at index is undefined?
-    // create an empty array?
-  // push v into bucket array 
-  this._storage.set(index, v);
+  // cehck if bucket at index contains an array
+  if (!Array.isArray(this._storage.get(index))) {
+    // if not, create an empty array
+    //console.log(this._storage);
+    this._storage.set(index, []);
+  }
+  // push v into bucket array
+  this._storage.get(index).push([k, v]);
 };
 
 HashTable.prototype.retrieve = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  // access index bucket array 
-  return this._storage.get(index);
-    // get value from Limited Array
+  // check if storage[index] is an array
+  if (Array.isArray(this._storage.get(index))) {
+    // if yes, for each element in storage[index]
+    return this._storage.get(index).reduce(function(accumulator, element) {
+      // check if first index of element matches k
+      //debugger;
+      if (element[0] === k) {
+        // return 2nd index, which holds value
+        accumulator = element[1];
+      }
+      return accumulator;
+    }, undefined);
+    // if no, return undefined
+  } else {
+    return undefined;
+  }
 };
 
 HashTable.prototype.remove = function(k) {
