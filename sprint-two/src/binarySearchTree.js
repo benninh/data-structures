@@ -2,6 +2,7 @@ var BinarySearchTree = function(value) {
   var someInstance = newNode(value);
 
   _.extend(someInstance, BinarySearchTreeMethods);
+
   return someInstance;
 };
 
@@ -32,7 +33,6 @@ BinarySearchTreeMethods.insert = function(value) {
         //recurse
         goDownTree(currentNode.right, value);
       }
-
     }
       // else do nothing
   };
@@ -40,12 +40,63 @@ BinarySearchTreeMethods.insert = function(value) {
   goDownTree(this, value);
 };
 
-BinarySearchTreeMethods.contains = function() {
-  
+BinarySearchTreeMethods.contains = function(value) {
+  // compare current node value to value
+  if (this.value === value) {
+    // if current value = value
+      // return true
+    return true;
+  } else {
+    // else
+      // if current value < value
+    if (this.value < value) {
+        // go right
+          // check if right node is null
+      if (this.right === null) {
+        // if yes, return false
+        return false;
+      } else {
+        // else 
+        // recurse through right node of this
+        //_.extend(this.right, BinarySearchTreeMethods);
+
+        return this.contains.call(this.right, value);
+      }
+      
+    } else {
+      // else
+        // go left
+      if (this.value > value) {
+        // check if leftnode is null
+        if (this.left === null) {
+          // if yes, return false
+          return false;
+        } else {
+          // else 
+          // recurse through left node of this
+          //_.extend(this.left, BinarySearchTreeMethods);
+
+          return this.contains.call(this.left, value);
+        }
+      }
+    }
+  }
 };
 
-BinarySearchTreeMethods.depthFirstLog = function () {
-
+BinarySearchTreeMethods.depthFirstLog = function(callback) {
+  // start at first node this
+  callback(this.value);
+    // callback on value of node
+    // check if node has left property
+  if (this.left) {
+    // if yes, recurse left
+    this.depthFirstLog.call(this.left, callback);
+  }
+  // check if node has right property
+  if (this.right) {
+    // if yes, recurse right
+    this.depthFirstLog.call(this.right, callback);
+  }
 };
 
 var newNode = function(value) {
@@ -53,6 +104,9 @@ var newNode = function(value) {
   node.value = value;
   node.left = null;
   node.right = null;
+
+  _.extend(node, BinarySearchTreeMethods);
+
   return node;
 };
 /*

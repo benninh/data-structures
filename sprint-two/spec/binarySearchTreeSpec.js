@@ -24,7 +24,8 @@ describe('binarySearchTree', function() {
     binarySearchTree.insert(2);
     binarySearchTree.insert(3);
     binarySearchTree.insert(7);
-    expect(binarySearchTree.contains(7)).to.equal(true);
+    binarySearchTree.insert(6);
+    expect(binarySearchTree.contains(3)).to.equal(true);
     expect(binarySearchTree.contains(8)).to.equal(false);
   });
 
@@ -35,5 +36,20 @@ describe('binarySearchTree', function() {
     binarySearchTree.insert(3);
     binarySearchTree.depthFirstLog(func);
     expect(array).to.eql([5, 2, 3]);
+    var newTest = [];
+    var newFunc = function(value) { newTest.push(value); };
+    binarySearchTree.insert(4);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(8);
+    binarySearchTree.insert(6);
+    binarySearchTree.insert(20);
+    binarySearchTree.insert(17);
+    binarySearchTree.insert(21);
+    binarySearchTree.insert(14);
+    binarySearchTree.insert(18);
+    binarySearchTree.insert(1);
+    binarySearchTree.depthFirstLog(newFunc);
+    console.log(newTest);
+    expect(newTest).to.eql([5, 2, 1, 3, 4, 7, 6, 8, 20, 17, 14, 18, 21]);
   });
 });
