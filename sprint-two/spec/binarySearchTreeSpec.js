@@ -36,8 +36,13 @@ describe('binarySearchTree', function() {
     binarySearchTree.insert(3);
     binarySearchTree.depthFirstLog(func);
     expect(array).to.eql([5, 2, 3]);
+  });
+
+  it('should execute callback in the correct order', function() {
     var newTest = [];
     var newFunc = function(value) { newTest.push(value); };
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(3);
     binarySearchTree.insert(4);
     binarySearchTree.insert(7);
     binarySearchTree.insert(8);
@@ -49,7 +54,14 @@ describe('binarySearchTree', function() {
     binarySearchTree.insert(18);
     binarySearchTree.insert(1);
     binarySearchTree.depthFirstLog(newFunc);
-    console.log(newTest);
+    expect(newTest).to.eql([5, 2, 1, 3, 4, 7, 6, 8, 20, 17, 14, 18, 21]);
+  });
+
+  it('should insert correctly given multiple arguments', function() {
+    var newTest = [];
+    var newFunc = function(value) { newTest.push(value); };
+    binarySearchTree.insert(2, 3, 4, 7, 8, 6, 20, 17, 21, 14, 18, 1);
+    binarySearchTree.depthFirstLog(newFunc);
     expect(newTest).to.eql([5, 2, 1, 3, 4, 7, 6, 8, 20, 17, 14, 18, 21]);
   });
 });

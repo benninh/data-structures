@@ -7,14 +7,19 @@ var BinarySearchTree = function(value) {
 var BinarySearchTreeMethods = {};
 
 BinarySearchTreeMethods.insert = function(value) {
-  
+  var argArray = Array.prototype.slice.call(arguments);
+
   var goDownTree = function(currentNode, value) {
     // check if currentNode.value < value
+    //console.log(currentNode);
+
     if (currentNode.value > value) {
       // if yes, handle left
       // check if currentNode.left is null
+      //console.log('5 less than 2')
       if (currentNode.left === null) {
         // if yes, currentNode.left = newNode(value);
+        //console.log("create left node")
         currentNode.left = newNode(value);
       } else {
         // else 
@@ -32,10 +37,12 @@ BinarySearchTreeMethods.insert = function(value) {
         goDownTree(currentNode.right, value);
       }
     }
-      // else do nothing
   };
-
-  goDownTree(this, value);
+  var thisVariable = this;
+  argArray.forEach(function(element) {
+  //console.log(element);
+    goDownTree(thisVariable, element);
+  });
 };
 
 BinarySearchTreeMethods.contains = function(value) {
