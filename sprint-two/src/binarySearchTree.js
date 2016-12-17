@@ -1,8 +1,6 @@
 var BinarySearchTree = function(value) {
   var someInstance = newNode(value);
 
-  _.extend(someInstance, BinarySearchTreeMethods);
-
   return someInstance;
 };
 
@@ -58,7 +56,6 @@ BinarySearchTreeMethods.contains = function(value) {
       } else {
         // else 
         // recurse through right node of this
-        //_.extend(this.right, BinarySearchTreeMethods);
 
         return this.contains.call(this.right, value);
       }
@@ -74,7 +71,6 @@ BinarySearchTreeMethods.contains = function(value) {
         } else {
           // else 
           // recurse through left node of this
-          //_.extend(this.left, BinarySearchTreeMethods);
 
           return this.contains.call(this.left, value);
         }
@@ -105,10 +101,14 @@ var newNode = function(value) {
   node.left = null;
   node.right = null;
 
+  // add methods to each node in tree
   _.extend(node, BinarySearchTreeMethods);
 
   return node;
 };
 /*
  * Complexity: What is the time complexity of the above functions?
+ insert - log(n)
+ contains - log(n)
+ depth - linear
  */
