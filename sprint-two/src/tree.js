@@ -19,7 +19,32 @@ treeMethods.addChild = function(value) {
 };
 
 treeMethods.contains = function(target) {
+  if (this.value === target) {
+    return true;
+  } else {
+    if (this.children.length > 0) {
+      return _.reduce(this.children, function(accum, child) {
+        if (accum === true) {
+          return accum;
+        } else {
+          return child.contains(target);
+        }
+      }, false);
+    } else {
+      return false;
+    }
+  }
+};
 
+/*
+ * Complexity: What is the time complexity of the above functions?
+ add is O(1);
+ contains is O(n);
+ */
+
+
+
+/* subroutine recursion implementation for contains
   // define a subroutine that takes current child and target
   var treeContains = function(currentChild, target) {
     // if currentChild.value is target
@@ -44,13 +69,4 @@ treeMethods.contains = function(target) {
     }
       
   };
-  return treeContains(this, target);
-};
-
-
-
-/*
- * Complexity: What is the time complexity of the above functions?
- add is O(1);
- contains is O(n);
- */
+  return treeContains(this, target);*/

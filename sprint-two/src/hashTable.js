@@ -40,7 +40,22 @@ HashTable.prototype.retrieve = function(k) {
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   // check if bucket at index has more than one value
-  this._storage.set(index, undefined);
+  //this._storage.set(index, undefined);
+  if (Array.isArray(this._storage.get(index))) {
+    // if yes, for each element in storage[index]
+    this._storage.get(index).forEach(function(element) {
+      // check if first index of element matches k
+      //debugger;
+      // console.log(element);
+      if (element[0] === k) {
+        // return 2nd index, which holds value
+        element[0] = undefined;
+        element[1] = undefined;
+      }
+    });
+    // if no, return undefined
+  } 
+
 };
 
 
