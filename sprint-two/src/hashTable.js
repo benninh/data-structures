@@ -10,7 +10,6 @@ HashTable.prototype.insert = function(k, v) {
   // cehck if bucket at index contains an array
   if (!Array.isArray(this._storage.get(index))) {
     // if not, create an empty array
-    //console.log(this._storage);
     this._storage.set(index, []);
   }
   // push v into bucket array
@@ -24,7 +23,6 @@ HashTable.prototype.retrieve = function(k) {
     // if yes, for each element in storage[index]
     return this._storage.get(index).reduce(function(accumulator, element) {
       // check if first index of element matches k
-      //debugger;
       if (element[0] === k) {
         // return 2nd index, which holds value
         accumulator = element[1];
@@ -40,13 +38,10 @@ HashTable.prototype.retrieve = function(k) {
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   // check if bucket at index has more than one value
-  //this._storage.set(index, undefined);
   if (Array.isArray(this._storage.get(index))) {
     // if yes, for each element in storage[index]
     this._storage.get(index).forEach(function(element) {
       // check if first index of element matches k
-      //debugger;
-      // console.log(element);
       if (element[0] === k) {
         // return 2nd index, which holds value
         element[0] = undefined;

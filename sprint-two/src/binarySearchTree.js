@@ -11,18 +11,14 @@ BinarySearchTreeMethods.insert = function(value) {
 
   var goDownTree = function(currentNode, value) {
     // check if currentNode.value < value
-    //console.log(currentNode);
-
     if (currentNode.value > value) {
       // if yes, handle left
       // check if currentNode.left is null
-      //console.log('5 less than 2')
       if (currentNode.left === null) {
         // if yes, currentNode.left = newNode(value);
-        //console.log("create left node")
         currentNode.left = newNode(value);
+      // else 
       } else {
-        // else 
         //recurse
         goDownTree(currentNode.left, value);
       }
@@ -31,8 +27,8 @@ BinarySearchTreeMethods.insert = function(value) {
       if (currentNode.right === null) {
         // if yes, currentNode.right = newNode(value);
         currentNode.right = newNode(value);
+      // else 
       } else {
-        // else 
         //recurse
         goDownTree(currentNode.right, value);
       }
@@ -40,45 +36,42 @@ BinarySearchTreeMethods.insert = function(value) {
   };
   var thisVariable = this;
   argArray.forEach(function(element) {
-  //console.log(element);
     goDownTree(thisVariable, element);
   });
 };
 
 BinarySearchTreeMethods.contains = function(value) {
   // compare current node value to value
+  // if current value = value
   if (this.value === value) {
-    // if current value = value
-      // return true
+    // return true
     return true;
+  // else
   } else {
-    // else
-      // if current value < value
+    // if current value < value
     if (this.value < value) {
-        // go right
-          // check if right node is null
+      // go right
+      // check if right node is null
       if (this.right === null) {
         // if yes, return false
         return false;
+      // else 
       } else {
-        // else 
         // recurse through right node of this
-
         return this.contains.call(this.right, value);
       }
       
+    // else
     } else {
-      // else
-        // go left
+      // go left
       if (this.value > value) {
         // check if leftnode is null
         if (this.left === null) {
           // if yes, return false
           return false;
+        // else 
         } else {
-          // else 
           // recurse through left node of this
-
           return this.contains.call(this.left, value);
         }
       }

@@ -1,11 +1,8 @@
 var Tree = function(value) {
   var newTree = {};
   newTree.value = value;
+  newTree.children = [];
 
-  // your code here
-  newTree.children = [];  // fix me
-
-  // fill the node with treeMethods
   _.extend(newTree, treeMethods);
 
   return newTree;
